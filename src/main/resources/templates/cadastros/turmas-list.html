@@ -18,12 +18,12 @@
 				<tr>
 					<td>Curso:</td>
 					<td>
-						<select class="form-control" id="curso" th:field="*{curso}">
+						<select class="form-control" id="curso" th:field="*{curso}" required>
 							<option 
 								th:each="item : ${listaCursos}" 
 								th:value="${item.id}"
 								
-								th:text="${item.nome}" selected="selected"></option>
+								th:text="${item.nome}" selected="selected" ></option>
 						</select> 
 					</td>
 				</tr>

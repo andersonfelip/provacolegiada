@@ -11,8 +11,16 @@ public class TurmaService {
 
 	@Autowired
 	private TurmaRepository repositorio;
+	
+	@Autowired
+	private CursoRepository cursoRepository;
 
-	public List<Turma> listarTodas() {
+	public List<Turma> listarTodas() throws Exception {
+		
+		List<Curso> curso = cursoRepository.findAll();
+		if(curso.size() == 0){
+			throw new Exception("Não poderão existir duas turmas com mesmo curso, período, turno e semestre letivo");
+		}
 		return repositorio.findAll(Sort.by("curso.nome"));
 	}
 
@@ -24,7 +32,15 @@ public class TurmaService {
 		return repositorio.findById(id).orElse(null);
 	}
 
-	public <S extends Turma> S salvar(S entity) {
+	public <S extends Turma> S salvar(S entity) throws Exception {
+		if(entity.getCurso() == null) {
+			throw new Exception("Não é possível criar turmas sem cursos no sistema.");
+		}
+		
+		Turma turma = repositorio.findFirstByCursoNomeIgnoreCaseAndAnoAndEntrada(entity.getCurso().getNome(), entity.getAno(), entity.getEntrada());
+		if(turma != null) {
+			throw new Exception("Não poderão existir duas turmas com mesmo curso, período, turno e semestre letivo");
+		}
 		return repositorio.saveAndFlush(entity);
 	}
 

@@ -21,9 +21,16 @@ public class CursoService {
 	}
 
 	public Curso salvar(Curso curso) throws Exception {
-		if (repositorio.existsByNome(curso.getNome())) {
+		Curso c = repositorio.findByNome(curso.getNome());
+		
+		if(curso.getId() != null && c != null && curso.getId() != c.getId()) {
 			throw new Exception("Já existe curso com este nome");
 		}
+		
+		if(curso.getId() == null && c != null) {
+			throw new Exception("Já existe curso com este nome");
+		}
+		
 		return repositorio.saveAndFlush(curso);
 	}
 
