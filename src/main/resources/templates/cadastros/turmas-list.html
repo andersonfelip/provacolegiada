@@ -52,6 +52,15 @@
 					</td>
 				</tr>
 				<tr>
+					<td>Situacao</td>
+					<td>
+						<select th:field="*{situacao}">
+						  <option value="">Selecione situacao</option>
+						  <option th:each="situacao : ${T(br.ifpe.pg.provacolegiada.provacolegiada.constants.SituacaoTurmaEnum).values()}" th:value="${situacao}" th:text="${situacao.descricao}"></option>
+						</select>
+					</td>
+				</tr>
+				<tr>
 					<td colspan="2" align="right">
 						<button type="submit" class="btn btn-primary"  name="action" value="salvar">Salvar</button>&nbsp;&nbsp;					
 						<button type="submit" class="btn btn-info" name="action" value="pesquisar">Pesquisar</button>&nbsp;&nbsp;
@@ -73,6 +82,7 @@
 					<th>Turno</th>
 					<th>Ano</th>
 					<th>Entrada</th>
+					<th>Situacao</th>
 					<th>Editar</th>
 					<th>Remover</th>
 				</tr>
@@ -83,6 +93,7 @@
 					<td th:text="${turma.turno.text}"></td>
 					<td th:text="${turma.ano}"></td>
 					<td th:text="${turma.entrada}"></td>
+					<td th:text="${turma.situacao.descricao}"></td>
 					<td><a class="btn btn-warning"
 						th:href="@{/turmas/edit/{id}(id=${turma.id})}">Editar</a></td>
 					<td><a class="btn btn-warning"

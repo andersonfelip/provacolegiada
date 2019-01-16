@@ -20,8 +20,7 @@
 						th:field="*{nome}" size="50" /></td>
 					<td><select th:field="*{modalidade}">
 						  <option value="">Selecione modalidade</option>
-						  <option value="EAD">EAD</option>
-						  <option value="Presencial">Presencial</option>
+						  <option th:each="modalidade : ${T(br.ifpe.pg.provacolegiada.provacolegiada.constants.ModalidadeEnum).values()}" th:value="${modalidade}" th:text="${modalidade.descricao}"></option>
 						</select></td>
 					<td><select th:field="*{professor}">
 						  <option value="">Selecione professor</option>
@@ -43,6 +42,8 @@
 			<thead>
 				<tr>
 					<th>Nome</th>
+					<th>Modalidade</th>
+					<th>Coordenador</th>
 					<th>Carga horária</th>
 					<th>Editar</th>
 					<th>Remover</th>
@@ -51,6 +52,8 @@
 			<tbody>
 				<tr th:each="curso : ${lista}">
 					<td th:text="${curso.nome}"></td>
+					<td th:text="${curso.modalidade.descricao}"></td>
+					<td th:text="${curso.professor.nome}"></td>
 					<td th:text="${curso.cargaHoraria}"></td>
 					<td><a class="btn btn-warning"
 						th:href="@{/cursos/edit/{id}(id=${curso.id})}">Edit</a></td>

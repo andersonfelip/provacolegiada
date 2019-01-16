@@ -1,11 +1,11 @@
 package br.ifpe.pg.provacolegiada.provacolegiada.constants;
 
-public enum ModalidadeEnum {
-	E("EAD"),P("Presencial");
+public enum SituacaoTurmaEnum {
+	A("Ativo"),I("Inativo");
 	
 	public String descricao;
 	
-	ModalidadeEnum(String descricao){
+	SituacaoTurmaEnum(String descricao){
 		this.descricao = descricao;
 	}
 }

@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import br.ifpe.pg.provacolegiada.provacolegiada.constants.SituacaoTurmaEnum;
+
 @Entity
 public class Turma {
 
@@ -19,7 +21,8 @@ public class Turma {
 	private Turno turno;
 	private int ano;
 	private int entrada;	
-	private String situacao;
+	@Enumerated(EnumType.STRING)
+	private SituacaoTurmaEnum situacao;
 	
 	public Turma() {
 		super();
@@ -54,10 +57,10 @@ public class Turma {
 	public void setEntrada(int entrada) {
 		this.entrada = entrada;
 	}
-	public String getSituacao() {
+	public SituacaoTurmaEnum getSituacao() {
 		return situacao;
 	}
-	public void setSituacao(String situacao) {
+	public void setSituacao(SituacaoTurmaEnum situacao) {
 		this.situacao = situacao;
 	}
 	

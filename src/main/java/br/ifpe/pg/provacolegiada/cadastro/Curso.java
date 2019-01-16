@@ -1,6 +1,8 @@
 package br.ifpe.pg.provacolegiada.cadastro;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,8 +23,8 @@ public class Curso {
 	private String nome;
 	@Min(value = 40)
 	private int cargaHoraria;
-	@NotBlank
-	private String modalidade;
+	@Enumerated(EnumType.STRING)
+	private ModalidadeEnum modalidade;
 	@NotNull 
 	@OneToOne 
 	private Professor professor;
@@ -31,7 +33,7 @@ public class Curso {
 
 	}
 
-	public Curso(Integer id, String nome, int cargaHoraria, String modalidade, Professor professor) {
+	public Curso(Integer id, String nome, int cargaHoraria, ModalidadeEnum modalidade, Professor professor) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -66,11 +68,11 @@ public class Curso {
 	
 	
 
-	public String getModalidade() {
+	public ModalidadeEnum getModalidade() {
 		return modalidade;
 	}
 
-	public void setModalidade(String modalidade) {
+	public void setModalidade(ModalidadeEnum modalidade) {
 		this.modalidade = modalidade;
 	}
 
